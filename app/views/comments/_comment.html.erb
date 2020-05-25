@@ -1,0 +1,22 @@
+<div class="panel "style ="width :67%;margin-left:8%">
+  <div class="panel-heading">
+    <span><%= @comments.size%>Comment</span>
+    <div class="panel-body">
+      <ul class="list-group">
+        <% @comments.each do |comment|%>
+          <span class="user"><%= link_to comment.user.name, comment.user %></span>
+            <li class="list-group-item"><%= comment.content %></li>
+          <span class="timestamp">
+            Posted <%= time_ago_in_words(comment.created_at) %> ago.
+            <% if current_user?(comment.user) %>
+                <%= link_to "delete", comment, method: :delete,
+                data: { confirm: "You sure?" } %>
+            <% end %>
+          </span>
+          <hr>
+        <% end %>
+      </ul>
+    </div>
+    <%= render 'shared/comment_form' %>
+  </div>
+</div>

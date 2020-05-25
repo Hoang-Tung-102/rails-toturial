@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post'/login',to: 'sessions#create'
   delete '/logout',to: 'sessions#destroy'
+  # root "comments#index"
+  resources :comments, only: [ :create , :destroy ,:edit, :update]
   resources :users do
     member do
       get :following, :followers
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
   end
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:create, :destroy ,:show]
   resources :relationships, only: [:create, :destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
